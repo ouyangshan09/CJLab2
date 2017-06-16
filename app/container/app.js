@@ -5,6 +5,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Button } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
+import BasicScreen from '../views/example/basic';
+import LayoutScreen from '../views/example/layout';
+import NetworkScreen from '../views/example/network';
 
 class App extends Component {
     static displayName = 'CJ_APP';
@@ -31,6 +34,7 @@ class App extends Component {
     }
 }
 
+// 屏幕1
 class RecentChatScreen extends Component {
 
     static propTypes = {
@@ -51,6 +55,7 @@ class RecentChatScreen extends Component {
     }
 }
 
+// 屏幕2
 class AllContactsScreen extends Component {
 
     static propTypes = {
@@ -71,14 +76,34 @@ class AllContactsScreen extends Component {
     }
 }
 
-const MainScreenNavigator = TabNavigator({
-    Recent: { screen: RecentChatScreen },
-    All: { screen: AllContactsScreen },
-    Person: { screen: RecentChatScreen }
-});
-MainScreenNavigator.navigationOptions = {
-    title: 'My Chats'
+// 路由配置
+const routeConfigs = {
+    // Recent: { screen: RecentChatScreen },
+    // All: { screen: AllContactsScreen },
+    // Person: { screen: RecentChatScreen }
+    Basic: {
+        screen: BasicScreen,
+    },
+    Layout: {
+        screen: LayoutScreen
+    },
+    Network: {
+        screen: NetworkScreen
+    }
 };
+
+// Tab导航配置
+const tabNavigatorConfig = {
+    initialRouteName: 'Layout',
+    navigationOptions: {
+        title: 'React Native 组件学习导航'
+    }
+};
+
+const MainScreenNavigator = TabNavigator(routeConfigs, tabNavigatorConfig);
+// MainScreenNavigator.navigationOptions = {
+//     title: 'React Native 组件学习导航'
+// };
 
 class ChartScreen extends Component {
     static displayName = 'ChartScreen';
@@ -121,8 +146,8 @@ class ChartScreen extends Component {
 }
 
 const SimpleApp = StackNavigator({
-    Home: { screen: MainScreenNavigator},
-    Chat: { screen: ChartScreen}
+    Home: { screen: MainScreenNavigator}
+    // Chat: { screen: ChartScreen}
 });
 
 export default SimpleApp;

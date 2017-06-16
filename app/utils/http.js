@@ -117,7 +117,7 @@ const createHeader = type => {
 };
 
 /**
- * Http请求对象构造这模式
+ * Http请求对象 - 建造者设计模式
  * */
 class HttpRequest {
     constructor (option) {
