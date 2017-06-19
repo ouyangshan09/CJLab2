@@ -5,9 +5,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Button } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
+import * as RouteName from '../views/example/constant/routeName';
 import BasicScreen from '../views/example/basic';
 import LayoutScreen from '../views/example/layout';
 import NetworkScreen from '../views/example/network';
+import { SimpleList, BaseList } from '../views/example/basic/ListView';
 
 class App extends Component {
     static displayName = 'CJ_APP';
@@ -36,29 +38,48 @@ class App extends Component {
 
 // 路由配置
 const routeConfigs = {
-    Basic: {
+    [RouteName.BASIC]: {
         screen: BasicScreen,
     },
-    Layout: {
+    [RouteName.LAYOUT]: {
         screen: LayoutScreen
     },
-    Network: {
+    [RouteName.NETWORK]: {
         screen: NetworkScreen
     }
 };
 
 // Tab导航配置
 const tabNavigatorConfig = {
-    initialRouteName: 'Layout',
-    tabBarPosition: 'bottom'
+    initialRouteName: RouteName.BASIC,
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+        labelStyle: {
+            fontSize: 18,
+            color: '#fff'
+        },
+        // tabStyle: {
+        //     width: 100
+        // },
+        scrollEnabled: false
+    }
 };
 
 const AppScreenNavigator = TabNavigator(routeConfigs, tabNavigatorConfig);
 
 const SimpleApp = StackNavigator({
-    Home: {
+    [RouteName.HOME]: {
         screen: AppScreenNavigator
+    },
+    [RouteName.SIMPLELIST]: {
+        path: 'basic/simpleList',
+        screen: SimpleList
+    },
+    [RouteName.BASELIST]: {
+        path: 'basic/baseList',
+        screen: BaseList
     }
+
 }, {
     navigationOptions: {
         title: 'React Native 组件学习导航'
