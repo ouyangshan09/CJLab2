@@ -96,14 +96,12 @@ const routeConfigs = {
 const tabNavigatorConfig = {
     initialRouteName: 'Layout',
     navigationOptions: {
-        title: 'React Native 组件学习导航'
-    }
+        // title: 'React Native 组件学习导航'
+    },
+    tabBarPosition: 'bottom'
 };
 
-const MainScreenNavigator = TabNavigator(routeConfigs, tabNavigatorConfig);
-// MainScreenNavigator.navigationOptions = {
-//     title: 'React Native 组件学习导航'
-// };
+const AppScreenNavigator = TabNavigator(routeConfigs, tabNavigatorConfig);
 
 class ChartScreen extends Component {
     static displayName = 'ChartScreen';
@@ -146,8 +144,14 @@ class ChartScreen extends Component {
 }
 
 const SimpleApp = StackNavigator({
-    Home: { screen: MainScreenNavigator}
+    Home: {
+        screen: AppScreenNavigator
+    }
     // Chat: { screen: ChartScreen}
+}, {
+    navigationOptions: {
+        title: 'React Native 组件学习导航'
+    }
 });
 
 export default SimpleApp;
